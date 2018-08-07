@@ -13,15 +13,17 @@ spec:
   hostPath:
     path: "/mnt/data/modules"
 ---
+kind: PersistentVolume
 apiVersion: v1
-kind: PersistentVolumeClaim
 metadata:
-  name: openmrs-modules-claim
+  name: openmrs-owa-volume
+  labels:
+    type: local
 spec:
   storageClassName: manual
+  capacity:
+    storage: 10Mi
   accessModes:
     - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-
+  hostPath:
+    path: "/mnt/data/owa"
