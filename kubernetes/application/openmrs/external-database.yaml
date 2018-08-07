@@ -1,0 +1,20 @@
+# See https://cloudplatform.googleblog.com/2018/05/Kubernetes-best-practices-mapping-external-services.html
+kind: Service
+apiVersion: v1
+metadata:
+ name: mysql
+spec:
+ type: ClusterIP
+ ports:
+ - port: 3306
+   targetPort: 3306
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: mysql
+subsets:
+ - addresses:
+     - ip: 35.230.116.39 # IP of your MySQL instance
+   ports:
+     - port: 3306
